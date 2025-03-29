@@ -3,9 +3,10 @@ import "./RSVP.css";
 
 /* Font Awesome Icons */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faSpinner, faUser } from "@fortawesome/free-solid-svg-icons";
 
 interface DecilneFormData {
+  name: string,
   comments: string;
 }
 
@@ -15,6 +16,7 @@ const DeclineForm: React.FC = () => {
 
   // Store form data in state (remains even if form is hidden)
   const [declineFormData, setDeclineFormData] = useState<DecilneFormData>({
+    name: "",
     comments: "",
   });
 
@@ -83,6 +85,7 @@ const DeclineForm: React.FC = () => {
         alert("Form submitted successfully!");
         // Reset the form if desired
         setDeclineFormData({
+          name: "",
           comments: "",
         });
         setShowDeclineForm(false);
@@ -109,6 +112,18 @@ const DeclineForm: React.FC = () => {
           <div className="rsvp-modal" ref={formRef}>
             <form className="rsvp-form" onSubmit={handleSubmit}>
               <h2>We'll miss you!</h2>
+
+              <div className="input-container">
+                <FontAwesomeIcon icon={faUser} className="icon" />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  value={declineFormData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
               <div className="input-container">
                 <FontAwesomeIcon icon={faHeart} className="icon" />
